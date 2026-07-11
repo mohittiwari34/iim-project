@@ -1,0 +1,21 @@
+{
+  "name": "investment-agent-server",
+  "version": "1.0.0",
+  "description": "Backend server for AI Investment Research Agent using LangChain and Express",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.2.14",
+    "@langchain/google-genai": "^0.0.22",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "langchain": "^0.2.8",
+    "yahoo-finance2": "^2.14.2",
+    "zod": "^3.23.8"
+  }
+}
