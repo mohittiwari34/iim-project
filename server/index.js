@@ -21,6 +21,15 @@ if (config.nodeEnv === 'development') {
   });
 }
 
+// Root Endpoint (useful for Render health checks)
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'AI Investment Research Agent Backend API is Running',
+    healthCheck: '/health',
+    analyzeEndpoint: '/api/analyze'
+  });
+});
+
 // Health Check Endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({
