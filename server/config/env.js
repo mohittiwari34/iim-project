@@ -22,7 +22,7 @@ if (missingEnv.length > 0) {
 
 export const config = {
   port: parseInt(process.env.PORT || '5000', 10),
-  geminiApiKey: process.env.GEMINI_API_KEY || '',
-  tavilyApiKey: process.env.TAVILY_API_KEY || '',
+  geminiApiKey: (process.env.GEMINI_API_KEY || '').trim().replace(/^["']|["']$/g, ''),
+  tavilyApiKey: (process.env.TAVILY_API_KEY || '').trim().replace(/^["']|["']$/g, ''),
   nodeEnv: process.env.NODE_ENV || 'development',
 };
