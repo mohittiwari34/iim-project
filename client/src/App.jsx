@@ -41,8 +41,8 @@ export default function App() {
     setLastSearched(companyName);
 
     try {
-      // Use the environment variable if available, otherwise default to proxy route
-      const apiBaseUrl = import.meta.env.VITE_API_URL || '';
+      // Strip any trailing slash from VITE_API_URL to prevent double-slash (//) 404 errors
+      const apiBaseUrl = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
       const response = await axios.post(`${apiBaseUrl}/api/analyze`, {
         company: companyName,
       });
