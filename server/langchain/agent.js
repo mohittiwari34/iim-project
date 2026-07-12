@@ -38,16 +38,25 @@ export const analysisResponseSchema = z.object({
  * @returns {Promise<Object>} The structured JSON output conforming to analysisResponseSchema.
  */
 export async function analyzeCompany(companyName) {
+  console.log(`\n==================================================`);
+  console.log(`[AGENT] Starting analysis pipeline for: "${companyName}"`);
+  
   if (!companyName) {
     throw new Error('Company name is required for analysis');
   }
 
   const apiKey = config.geminiApiKey;
+  console.log(`[AGENT] Config Key length: ${apiKey ? apiKey.length : 0} chars`);
+  if (apiKey) {
+    console.log(`[AGENT] Key prefix: "${apiKey.substring(0, 6)}..." | suffix: "...${apiKey.substring(apiKey.length - 4)}"`);
+  }
+
   if (!apiKey) {
     throw new Error('GEMINI_API_KEY environment variable is not configured.');
   }
 
   try {
+    console.log(`[AGENT] Initializing ChatGoogleGenerativeAI model ('gemini-2.5-flash')`);
     // 1. Initialize Gemini LLM
     const llm = new ChatGoogleGenerativeAI({
       model: 'gemini-2.5-flash',

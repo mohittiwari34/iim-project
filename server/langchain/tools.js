@@ -97,9 +97,11 @@ export const yahooFinanceTool = tool(
  */
 export const geminiAnalysisTool = tool(
   async ({ rawData, aspect }) => {
+    console.log(`[TOOL: gemini_analysis] Starting sub-analysis aspect: "${aspect}"`);
     try {
       const apiKey = config.geminiApiKey;
       if (!apiKey) {
+        console.warn(`[TOOL: gemini_analysis] Missing GEMINI_API_KEY config`);
         return 'Error: GEMINI_API_KEY environment variable is missing.';
       }
 
