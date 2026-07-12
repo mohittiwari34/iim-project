@@ -41,8 +41,9 @@ export default function App() {
     setLastSearched(companyName);
 
     try {
-      // Use proxy endpoint configured in vite.config.js for local development
-      const response = await axios.post('/api/analyze', {
+      // Strip any trailing slash from VITE_API_URL to prevent double-slash (//) 404 errors in production
+      const apiBaseUrl = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+      const response = await axios.post(`${apiBaseUrl}/api/analyze`, {
         company: companyName,
       });
       
