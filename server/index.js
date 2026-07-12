@@ -47,6 +47,14 @@ app.get('/health', (req, res) => {
       tavilyKeySet: tavilyKey.length > 0,
       tavilyKeyLength: tavilyKey.length,
       tavilyKeyStart: tavilyKey.length > 4 ? tavilyKey.substring(0, 4) + '...' : 'N/A',
+      authEnvKeys: Object.keys(process.env).filter(
+        (k) =>
+          k.toLowerCase().includes('google') ||
+          k.toLowerCase().includes('gemini') ||
+          k.toLowerCase().includes('key') ||
+          k.toLowerCase().includes('auth') ||
+          k.toLowerCase().includes('cred')
+      ),
     }
   });
 });
