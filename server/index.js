@@ -32,10 +32,22 @@ app.get('/', (req, res) => {
 
 // Health Check Endpoint
 app.get('/health', (req, res) => {
+  const geminiKey = config.geminiApiKey || '';
+  const tavilyKey = config.tavilyApiKey || '';
+
   res.status(200).json({
     status: 'healthy',
     timestamp: new Date().toISOString(),
     env: config.nodeEnv,
+    diagnostics: {
+      geminiKeySet: geminiKey.length > 0,
+      geminiKeyLength: geminiKey.length,
+      geminiKeyStart: geminiKey.length > 4 ? geminiKey.substring(0, 4) + '...' : 'N/A',
+      geminiKeyEnd: geminiKey.length > 4 ? '...' + geminiKey.substring(geminiKey.length - 4) : 'N/A',
+      tavilyKeySet: tavilyKey.length > 0,
+      tavilyKeyLength: tavilyKey.length,
+      tavilyKeyStart: tavilyKey.length > 4 ? tavilyKey.substring(0, 4) + '...' : 'N/A',
+    }
   });
 });
 
